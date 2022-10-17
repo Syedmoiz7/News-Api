@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
-import NewsApi from './news.jsx'
+import News from './news.jsx'
 
-function NewsFeed()  {
+function NewsFeed() {
     const [news, setNews] = useState([])
 
     useEffect(() => {
@@ -21,16 +21,15 @@ function NewsFeed()  {
     return (
         <div className="newsApi">
             <div className="heading">
-                <h1>Calling News API</h1>
+            <h1>Calling News API</h1>
             </div>
 
-            {
-            news.map((eachNews, i) => (
+            {news.map((eachNews, i) => (
                 <div className="newsContainer">
-                    <NewsApi
+                    <News
                         source={eachNews.source}
                         author={eachNews.author}
-                    ></NewsApi>
+                    ></News>
                 </div>
 
             ))

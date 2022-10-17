@@ -1,6 +1,6 @@
 import "./news.css"
 
-const NewsApi = ({author, content, description, source, title, url, urlToImage}) => (
+const News = ({author, content, description, source, title, url, urlToImage}) => (
     <div className="mainContainer">
         <div className="source">{source}</div>
         <div className="author">{author}</div>
@@ -12,4 +12,4 @@ const NewsApi = ({author, content, description, source, title, url, urlToImage})
     </div>
 ) 
 
-export default NewsApi;
+export default News;
