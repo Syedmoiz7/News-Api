@@ -12,14 +12,14 @@ function NewsFeed() {
         function getTrendingNews() {
             const options = {
                 method: 'GET',
-                url: 'https://bing-news-search1.p.rapidapi.com/news',
-                params: { safeSearch: 'Off', textFormat: 'Raw' },
+                url: 'https://bing-news-search1.p.rapidapi.com/news/trendingtopics',
+                params: {textFormat: 'Raw', safeSearch: 'Off'},
                 headers: {
-                    'X-BingApis-SDK': 'true',
-                    'X-RapidAPI-Key': '85KnnuP4HzmshYuCcfjg1sCMFdYkp18e8NojsnQP6hFvDHXrBr',
-                    'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+                  'X-BingApis-SDK': 'true',
+                  'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
+                  'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
                 }
-            };
+              };
         
 
         axios.request(options).then(function (response) {
@@ -36,39 +36,6 @@ function NewsFeed() {
     }, [])
 
 
-
-
-
-    //     useEffect(() => {
-    //         axios.get(`
-    //         https://newsapi.org/v2/everything?q=tesla&from=2022-09-17&sortBy=publishedAt&apiKey=0061f7a5e9164b1e8d31397786595487`)
-    //             .then(response => {
-    //                 console.log(response);
-    //                 setNews(response.data)
-    //             })
-    //             .catch(err => {
-    //                 console.log("error: ", err);
-    //             })
-    //     }, [])
-
-    //     return (
-    //         <div className="newsApi">
-    //             <div className="heading">
-    //             <h1>Calling News API</h1>
-    //             </div>
-
-    //             {news.map((eachNews) => (
-    //                 <div className="newsContainer">
-    //                     <News
-    //                         source={eachNews.source}
-    //                         author={eachNews.author}
-    //                     ></News>
-    //                 </div>
-
-    //             ))
-    //             }
-    //         </div >
-    //     )
 
 
 
