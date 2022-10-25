@@ -13,22 +13,23 @@ function NewsFeed() {
             const options = {
                 method: 'GET',
                 url: 'https://bing-news-search1.p.rapidapi.com/news/trendingtopics',
-                params: {textFormat: 'Raw', safeSearch: 'Off'},
+                params: { textFormat: 'Raw', safeSearch: 'Off' },
                 headers: {
-                  'X-BingApis-SDK': 'true',
-                  'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
-                  'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+                    'X-BingApis-SDK': 'true',
+                    'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
+                    'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
                 }
-              };
-        
+            };
 
-        axios.request(options).then(function (response) {
-            console.log(response.data);
-            setNews(response.data.value)
-        })
-            .catch(function (error) {
-                console.error(error);
-            });
+
+            axios.request(options)
+            .then(function (response) {
+                console.log(response.data);
+                setNews(response.data.value)
+            })
+                .catch(function (error) {
+                    console.error(error);
+                });
         }
 
         getTrendingNews();
@@ -36,9 +37,42 @@ function NewsFeed() {
     }, [])
 
 
+    const getNews = (e) => {
+        e.preventDefault();
 
+        const options = {
+            method: 'GET',
+            url: 'https://bing-news-search1.p.rapidapi.com/news/search',
+            params: { q: '<REQUIRED>', freshness: 'Day', textFormat: 'Raw', safeSearch: 'Off' },
+            headers: {
+                'X-BingApis-SDK': 'true',
+                'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
+                'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+            }
+        };
+        setIsLoading(true)
+        axios.request(options)
+            .then(function (response) {
+                setIsLoading(false)
+                console.log(response.data.value);
+                setNews(response.data.value)
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
 
-
+    return(
+        <div className="main">
+            <form onSubmit={getNews}>
+                <input type="text" placeholder='Enter your topic name'
+                onChange={(e) => {
+                    setQuery(e.target.value)
+                }} />
+                <button type='submit'>Get News</button>
+            </form>
+        </div>
+    )
 
 }
 
