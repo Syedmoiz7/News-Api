@@ -12,22 +12,19 @@ function NewsFeed() {
         function getTrendingNews() {
             const options = {
                 method: 'GET',
-                url: 'https://bing-news-search1.p.rapidapi.com/news/trendingtopics',
-                params: { textFormat: 'Raw', safeSearch: 'Off' },
+                url: 'https://bing-news-search1.p.rapidapi.com/news',
+                params: {safeSearch: 'Off', textFormat: 'Raw'},
                 headers: {
-                    'X-BingApis-SDK': 'true',
-                    'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
-                    'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+                  'X-BingApis-SDK': 'true',
+                  'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
+                  'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
                 }
-            };
-
-
-            axios.request(options)
-            .then(function (response) {
-                console.log(response.data);
+              };
+                axios.request(options)
+                .then(function (response) {
+                    console.log(response.data);
                 setNews(response.data.value)
-            })
-                .catch(function (error) {
+                }).catch(function (error) {
                     console.error(error);
                 });
         }
@@ -43,7 +40,7 @@ function NewsFeed() {
         const options = {
             method: 'GET',
             url: 'https://bing-news-search1.p.rapidapi.com/news/search',
-            params: { q: '<REQUIRED>', freshness: 'Day', textFormat: 'Raw', safeSearch: 'Off' },
+            params: { q: query, freshness: 'Day', textFormat: 'Raw', safeSearch: 'Off' },
             headers: {
                 'X-BingApis-SDK': 'true',
                 'X-RapidAPI-Key': '1be26150damshcb9b73880caddf8p1e52ccjsn08a3d434f6f5',
@@ -58,6 +55,7 @@ function NewsFeed() {
                 setNews(response.data.value)
             })
             .catch(function (error) {
+                setIsLoading(false)
                 console.error(error);
             });
     }
@@ -65,7 +63,7 @@ function NewsFeed() {
     return(
         <div className="main">
             <form onSubmit={getNews}>
-                <input type="text" placeholder='Enter your topic name'
+                <input type="text" placeholder='Search for topics, locatins & sources'
                 onChange={(e) => {
                     setQuery(e.target.value)
                 }} />
